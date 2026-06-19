@@ -4,6 +4,18 @@
 
 version: 2
 
+registries:
+  artifacts:
+    type: python-index
+    url: https://pkgs.dev.azure.com/signly/SLaaS/_packaging/Signly_ASI/pypi/simple/
+    username: "azure"
+    password: ${{secrets.AZURE_ARTIFACTS_PAT}}
+  artifacts_guid:
+    type: python-index
+    url: https://pkgs.dev.azure.com/signly/4e616834-dc46-4147-a5a6-95f299722753/_packaging/870b7904-5b34-4beb-82a6-e3251a7d2c33/pypi/simple/
+    username: "azure"
+    password: ${{secrets.AZURE_ARTIFACTS_PAT}}
+
 updates:
   # Enable version updates for GitHub Actions
   - package-ecosystem: "github-actions"
@@ -47,6 +59,10 @@ updates:
     labels:
       - "dependencies"
     open-pull-requests-limit: 10
+    registries:
+      - artifacts
+      - artifacts_guid
+    insecure-external-code-execution: allow
 
   # Enable version updates for Docker (if Dockerfile exists)
   - package-ecosystem: "docker"
